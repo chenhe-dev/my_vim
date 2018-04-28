@@ -68,6 +68,8 @@ set incsearch
 " 高亮搜索结果
 set hlsearch
 hi Search cterm=NONE ctermfg=white ctermbg=red
+" 映射ctrl+n为取消高亮
+nnoremap <C-N> :nohl<CR>
 
 " 禁止循环查找
 set nowrapscan
@@ -86,10 +88,7 @@ set completeopt=longest,menu
 " 设置历史记录为50条
 set history=50
 
-" 总显示最后一个窗口的状态行；设为1则窗口数多于一个的时候显示最后一个窗口的状态行；0不显示最后一个窗口的状态行
-" set laststatus=2
-
-" 标尺，用于显示光标位置的行号和列号，逗号分隔。每个窗口都有自己的标尺。如果窗口有状态行，标尺在那里显示。否则，它显示在屏幕的最后一行上。
+" 打开标尺, 在状态栏显示行列位置
 set ruler
 
 " 括号引号补全
@@ -106,16 +105,13 @@ set foldlevel=100 " 启动vim时不要自动折叠代码
 nnoremap <C-J> <C-E>
 nnoremap <C-K> <C-Y>
 
-" 映射ctrl+n为取消高亮
-nnoremap <C-N> :nohl<CR>
-
 " 映射m为移动到当前行的中部
 " nnoremap m :call cursor(0, len(getline('.'))/2)<CR>
 
 " 映射m为移动到当前光标与行尾的中部, 行内二分跳转
 " nnoremap m :call cursor(0 , col('.')+(len(getline('.'))- col('.'))/2)<CR>
 
-" vim中复制到系统剪切板, 需要apt-get install vim-gnome
+" vim中复制到系统剪切板, 需要+clipboard和+Xterm_clipboard的支持(vim --version).
 " place yanked text into the global clipboard, and paste from the global clipboard
 set clipboard=unnamedplus
 
@@ -146,6 +142,7 @@ hi ColorColumn ctermbg=black guibg=none
 " au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.json set filetype=javascript
 
+
 "-------------------------plugin setting-------------------------------------
 " leader键
 let mapleader=","
@@ -167,11 +164,11 @@ Plugin 'gmarik/Vundle.vim'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
-" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-" Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/taglist.vim'
 Plugin 'bling/vim-airline'
-" Plugin 'vim-scripts/winmanager'
+Plugin 'vim-scripts/winmanager'
 " Plugin 'vim-scripts/a.vim'
 Plugin 'kien/ctrlp.vim'
 " Plugin 'vim-scripts/OmniCppComplete'
@@ -263,6 +260,7 @@ nmap tg :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q *<CR> :set tags+=./ta
 " Ctrl+w Ctrl+] - Open the definition in a horizontal split
 
 " Open the definition in a vertical split
+" Alt + ]在右侧打开一个竖排窗口并显示函数定义
 " 处理Alt无法映射问题
 execute "set <M-]>=\e]"
 nnoremap <M-]> :vsp <CR> <C-W>l :exec("tag ".expand("<cword>"))<CR>
@@ -299,6 +297,7 @@ set cscopequickfix=s-,c-,d-,i-,t-,e-
 
 
 " airline设置
+" 始终显示下方状态栏
 set laststatus=2
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline
 " 使用powerline打过补丁的字体
@@ -358,15 +357,3 @@ let g:livedown_autorun = 0
 let g:livedown_open = 1
 " the port on which Livedown server will run
 let g:livedown_port = 1337
-
-" You Complete Me
-" let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
-" let g:ycm_server_keep_logfiles = 1
-" let g:ycm_autoclose_preview_window_after_completion = 1
-" nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
-" nnoremap <leader>jl :YcmCompleter GoToDeclaration<CR>
-" nnoremap <leader>ja :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" nnoremap ce :YcmDiags<CR>
-" 
-" YCM-Generator
-" nnoremap yg :YcmGenerateConfig<CR>
