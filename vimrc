@@ -253,9 +253,12 @@ let Tlist_Auto_Update=1            "Automatically update the taglist to include 
 set tags=tags
 " 添加系统调用路径
 set tags+=/home/linux/tags
-"键绑定，刷新tags
-nmap tg :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q *<CR> :set tags+=./tags<CR>:!find . -name "*.c" -name "*.[chsS]" -print > ./cscope.files<CR>:!cscope -Rbq<CR>:cs add ./cscope.out .<CR>
-"  nmap tg :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q *<CR> :set tags+=./tags<CR>:!find . -name "*.c" -name "*.[chsS]" -print | sed 's,^\./,,' > ./cscope.files<CR>:!cscope -Rbq<CR>:cs add ./cscope.out .<CR>
+" 键绑定，生成tags
+" 针对C, 排除成员变量类型(m)避免ctags结果太多造成干扰.
+" 具体类型可以通过ctags --list-kinds查看.
+nnoremap tg :!ctags -R --c++-kinds=+p --c-kinds=-m --fields=+iaS --extra=+q *<CR> :set tags+=./tags<CR>:!find . -name "*.c" -name "*.[chsS]" -print > ./cscope.files<CR>:!cscope -Rbq<CR>:cs add ./cscope.out .<CR>
+nnoremap <C-]> g<C-]>
+
 
 " Ctrl+w Ctrl+] - Open the definition in a horizontal split
 
