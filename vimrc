@@ -223,11 +223,11 @@ function! NERDTree_IsValid()
 endfunction
 
 " 键盘映射，同时加入防止因winmanager和nerdtree冲突而导致空白页的语句
-" nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
-nmap wm :WMToggle<CR>
+nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
+" nmap wm :WMToggle<CR>
 " 窗口布局
-" let g:winManagerWindowLayout='NERDTree|TagList'
-let g:winManagerWindowLayout='TagList'
+let g:winManagerWindowLayout='NERDTree|TagList'
+" let g:winManagerWindowLayout='TagList'
 " 设置winmanager的宽度，默认为25
 let g:winManagerWidth=30
 " 如果所有编辑文件都关闭了，退出vim
@@ -256,7 +256,7 @@ set tags+=/home/linux/tags
 " 键绑定，生成tags
 " 针对C, 排除成员变量类型(m)避免ctags结果太多造成干扰.
 " 具体类型可以通过ctags --list-kinds查看.
-nnoremap tg :!ctags -R --c++-kinds=+p --c-kinds=-m --fields=+iaS --extra=+q *<CR> :set tags+=./tags<CR>:!find . -name "*.c" -name "*.[chsS]" -print > ./cscope.files<CR>:!cscope -Rbq<CR>:cs add ./cscope.out .<CR>
+nnoremap tg :!ctags -R --c++-kinds=+p --c-kinds=-m --fields=+iaS --extra=+q *<CR> :set tags+=./tags<CR>:!find . -name "*.[chsS]" -print > ./cscope.files<CR>:!cscope -Rbq<CR>:cs add ./cscope.out .<CR>
 nnoremap <C-]> g<C-]>
 
 
