@@ -136,7 +136,7 @@ else
     au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%80v.\+', -1)
 endif
 " 80字符提示线颜色, 需要在colorscheme后面方可生效
-hi ColorColumn ctermbg=black guibg=none
+hi ColorColumn ctermbg=black guibg=NONE
 
 " 将ejs文件高亮当做html来处理
 " au BufNewFile,BufRead *.ejs set filetype=html
@@ -169,18 +169,13 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/winmanager'
-" Plugin 'vim-scripts/a.vim'
 Plugin 'kien/ctrlp.vim'
-" Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'moll/vim-bbye'
-
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'shime/vim-livedown'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'rdnetto/YCM-Generator'
 Plugin 'scrooloose/syntastic'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -233,7 +228,6 @@ let g:winManagerWidth=30
 " 如果所有编辑文件都关闭了，退出vim
 let g:persistentBehaviour=0
 
-
 " taglist设置
 let Tlist_Show_One_File=1 " 0为同时显示多个文件函数列表,1则只显示当前文件函数列表
 let Tlist_Auto_Update=1
@@ -247,7 +241,6 @@ let Tlist_Auto_Update=1            "Automatically update the taglist to include 
 "启动vim自动打开taglist
 "let Tlist_Auto_Open=1
 
-
 " ctags
 " ctags, 指定tags文件的位置,让vim自动在当前或者上层文件夹中寻找tags文件
 set tags=tags
@@ -259,14 +252,10 @@ set tags+=/home/linux/tags
 nnoremap tg :!ctags -R --c++-kinds=+p --c-kinds=-m --fields=+iaS --extra=+q *<CR> :set tags+=./tags<CR>:!find . -name "*.[chsS]" -print > ./cscope.files<CR>:!cscope -Rbq<CR>:cs add ./cscope.out .<CR>
 nnoremap <C-]> g<C-]>
 
-
-" Ctrl+w Ctrl+] - Open the definition in a horizontal split
-
 " Open the definition in a vertical split
-" Alt + ]在右侧打开一个竖排窗口并显示函数定义
-" 处理Alt无法映射问题
-execute "set <M-]>=\e]"
-nnoremap <M-]> :vsp <CR> <C-W>l :exec("tag ".expand("<cword>"))<CR>
+nnoremap ,v :vsp <CR> <C-W>l :exec("tag ".expand("<cword>"))<CR>
+" Open the definition in a horizontal split
+nnoremap ,h :sp <CR> <C-W>l :exec("tag ".expand("<cword>"))<CR>
 
 " Cscope 设置
 if has("cscope")
